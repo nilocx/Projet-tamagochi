@@ -13,24 +13,20 @@ class Statistique:
     def ajoute(self,augmentation):
         #ajoute une element a la liste choisi
         if len(self.stat)==10:
-            return print("est plein")
+            return "est plein"
         else:
             for i in range(augmentation):
                 self.stat.append(1)
         return self.stat
     def suprime(self,supression):
         #suprime le dernier eleemnt de la liste choisie
-        for j in range(supression):
-            self.stat.pop()
-            if len(self.stat)==0:
-                print('Vide/mort')
+        if len(self.stat)!=0:
+            for j in range(supression):
+                self.stat.pop()
+        else :
+            print('Vide/mort')
         return self.stat
     def total(self):
         #renvoi le contenue de la variable choisi
-        return self.stat
-
-# Definit les principale statistique du personnage
-faim=Statistique()
-energie=Statistique()
-depression=Statistique()
+        return len(self.stat)
 
