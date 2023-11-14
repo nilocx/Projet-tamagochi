@@ -72,7 +72,7 @@ class TamaGotshi:
 
         # Mise en place du bouton pour dormir
         self.btnDodo =  Button(self.fenetre, text="Dormir", font=("tahoma Bold", 13), fg='red', command=self.dormir)
-        self.btnDodo.place(x=75, y=900)
+        self.btnDodo.place(x=125, y=900)
 
         # Appelle la fonction correspondante au action fait par le joueur avec la souris
         self.can.bind("<Button-1>", self.canvas_clique)
@@ -128,7 +128,7 @@ class TamaGotshi:
         # Mise en place du bouton pour se reveiller
         self.btnDodo.destroy()
         self.btnPasDodo =  Button(self.fenetre, text="Se reveiller", font=("tahoma Bold", 13), fg='red', command=self.se_reveiller)
-        self.btnPasDodo.place(x=75, y=900)
+        self.btnPasDodo.place(x=125, y=900)
 
         self.vient_de_cliquer=True
         self.dort=True
@@ -163,7 +163,7 @@ class TamaGotshi:
         # Mise en place du bouton pour dormir
         self.btnPasDodo.destroy()
         self.btnDodo =  Button(self.fenetre, text="dormir", font=("tahoma Bold", 13), fg='red', command=self.dormir)
-        self.btnDodo.place(x=75, y=900)
+        self.btnDodo.place(x=125, y=900)
 
         self.dort = False
         self.vient_de_cliquer = True
@@ -177,6 +177,11 @@ class TamaGotshi:
         else:
             self.vient_de_cliquer = False
             self.fenetre.after(60000, self.baisse_energie)
+
+    def baisse_faim(self):
+        self.faim.suprime(1)
+        self.faim_label['text'] = "Faim: " + str(self.faim.total()) + "/10"
+        self.fenetre.after(7000, self.baisse_faim)
 
     def mouvement_alea(self): # Fonction pour déplacer l'image de manière aléatoire
         liste = [60000,55000,50000,45000,40000,35000,30000,25000,20000,15000,10000,5000,1000,1000,1000,10000,50000,60000,25000]
