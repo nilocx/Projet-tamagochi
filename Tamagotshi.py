@@ -1,11 +1,11 @@
 from tkinter import*
 import random
-from STAT_du_Perso_Tamagochie_cslg import Statistique
-from celui_pour_la_moula import Money
+from STAT_du_Perso_Tamagochie_cslg import*
+from celui_pour_la_moula import*
 from TAP import createPigeon, movePigeon, point, temps, TireAP
 global faim , energie , humeur , argent
 import subprocess
-
+from PIL import Image, ImageTk
 
 
 class TamaGotshi:
@@ -79,14 +79,39 @@ class TamaGotshi:
         self.can.bind("<ButtonRelease-1>", self.canvas_relache)
         self.can.bind("<B1-Motion>", self.canvas_glisse)
 
+    def annexeTAP(self):
 
+        #creation de la fenetre
+        self.avertissement=Tk()
+        self.avertissement.geometry("500x500")
+        self.avertissement.title("ATTENTION")
+
+        #affichage du texte
+        self.attention=Label(self.avertissement,text="Ha mince... Vous n'avez pas de fusils...")
+        self.attention.pack()
+
+        self.ironie=Label(self.avertissement,text="Domage  ¯\_(ツ)_/¯ ")
+        self.ironie.pack()
+
+        self.alternative=Label(self.avertissement,text="Mais vous pouvez les compter, pendant 1 minute !")
+        self.alternative.pack()
+
+        self.consigne=Label(self.avertissement,text=" Pour cela cliquez quand vous voyez un pigeon apparaitre.")
+        self.consigne.pack()
+
+        self.recompense=Label(self.avertissement,text="Si votre compte est juste vous recervrez de l' argent pour vous nourrir.")
+        self.recompense.pack()
+
+        #creation du bouton pour fermer la fenetre et lancer le jeu
+        self.bnt_lancer=Button(self.avertissement,text="lancer",command=self.avertissement.destroy)
+        self.bnt_lancer.pack()
 
     def parametre(self):
         self.fenetre3 = Tk()
         self.fenetre3.title("paramètre")
         self.fenetre3.configure(bg = "#878c94")
         self.fenetre3.geometry("528x356")
-        self.fichierImage1 = PhotoImage(master=self.fenetre3, file = "Tamagotshi-1.png")
+        self.fichierImage1 = PhotoImage(master=self.fenetre3, file = "Tamagotchi-1.png")
         self.labelImageDeFond1 = Label(self.fenetre3, image=self.fichierImage1)
         self.labelImageDeFond1.place(x=0, y=0)
         self.BoutonQuitter=Button(self.fenetre3,text="Quitter",fg ="#660066", bg="black",command=self.fenetre3.destroy)
@@ -102,15 +127,14 @@ class TamaGotshi:
         self.labelImageDeFond.place(x=0, y=0)
         self.BoutonQuitter=Button(self.fenetre2,text="Quitter",fg ="#660066", bg="black",height=1,width=5,command=self.fenetre2.destroy)
         self.BoutonQuitter.place(x=43, y=188)
-        self.BoutonTAP=Button(self.fenetre2,text="🦆TAP🦆",fg ="black", bg="#41edf2",height=2,width=5,command=TireAP)
+        self.BoutonTAP=Button(self.fenetre2,text="🦆TAP🦆",fg ="black", bg="#41edf2",height=2,width=5,command=self.annexeTAP)
         self.BoutonTAP.place(x=65, y=93)
         self.Boutonparametre=Button(self.fenetre2,text="⚙",fg ="black", bg="#e29723",height=2,width=4,command=self.parametre)
         self.Boutonparametre.place(x=20, y=36)
-        self.BoutonShop=Button(self.fenetre2,text="💸",fg ="black", bg="#f44575",height=2,width=5,command=self.exec(open("Magasin_Prototype.py").read()))
+        self.BoutonShop=Button(self.fenetre2,text="💸",fg ="black", bg="#f44575",height=2,width=5,command=self.fenetre2.destroy)
         self.BoutonShop.place(x=65, y=35)
 
-    def appel(self):
-        subprocess.call("Magasin_Prototype.py",shell=True)
+
 
     def dormir(self):
         #enlève l'image du lit vide
