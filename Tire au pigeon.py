@@ -65,6 +65,7 @@ def temps():
             thunes.ajout(100)
             humeur.ajout(1)
         else:
+            humeur.suprime(2)
             timer_label['text'] = "PERDUUUUUUUUUUUUUUUUU"
         return timer
     fenetreTireauPigeon.after(1000, temps)
