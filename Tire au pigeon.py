@@ -63,6 +63,7 @@ def temps():
         if compteurpigeon==score:
             timer_label['text'] = "VICTOIRE!!!! Le nombre de pigeons est juste!"
             thunes.ajout(100)
+            humeur.ajout(1)
         else:
             timer_label['text'] = "PERDUUUUUUUUUUUUUUUUU"
         return timer
