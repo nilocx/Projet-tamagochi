@@ -61,7 +61,7 @@ def temps():
     if timer==61:
         cvn.delete('all')
         if compteurpigeon==score:
-            timer_label['text'] = "VICTOIRE!!!! Le nombre de pigeons est juste! Vous aez comptez :" + score + "pigeons"
+            timer_label['text'] = "VICTOIRE!!!! Le nombre de pigeons est juste! Vous aez comptez :" +str(score) + "pigeons"
             thunes.ajout(100)
             humeur.ajout(1)
         else:
