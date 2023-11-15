@@ -23,7 +23,7 @@ class TamaGotshi:
         self.vient_de_cliquer = True
 
 
-        self.argent.ajout(500) # donne un peu d'argent dès le debut du jeu /peut servir pour des test en changeant le montant
+        self.argent.ajout(10) # donne un peu d'argent dès le debut du jeu /peut servir pour des test en changeant le montant
 
 
         self.fenetre = Tk()
@@ -113,6 +113,9 @@ class TamaGotshi:
 
         self.consigne=Label(self.avertissement,text=" Pour cela cliquez quand vous voyez un pigeon apparaitre.")
         self.consigne.pack()
+
+        self.attention=Label(self.avertissement,text="(ATTENTION il y en a toujours 1 qui apparait a la fin en haut de l'écran et il compte quand même 🙂)",font=("", 8))
+        self.attention.pack()
 
         self.recompense=Label(self.avertissement,text="Si votre compte est juste vous recervrez de l' argent pour vous nourrir.")
         self.recompense.pack()
@@ -322,13 +325,13 @@ class TAP:
         self.my_pigeon = self.cvn.create_image(x_position,y_position,anchor= 's', image=self.pigeonne)
         self.pigeons.append([self.my_pigeon, random.randint(5, 10), self.pigeonne])
         self.compteurpigeon += 1
-        if not self.timer == 8:
+        if not self.timer == 58:
             self.fenetreTireauPigeon.after(random.randint(700, 3000), self.createPigeon)
 
     def movePigeon(self):
         for i in self.pigeons:
             self.cvn.move(i[0], 0, i[1])
-        if not self.timer == 8:
+        if not self.timer == 60:
             self.fenetreTireauPigeon.after(random.randint(5, 15), self.movePigeon)
 
     def point(self, event):
@@ -343,7 +346,7 @@ class TAP:
         global en_jeu
         self.timer += 1
         self.timer_label['text'] = "Timer: " + str(self.timer)
-        if self.timer == 10:
+        if self.timer == 60:
             self.fin_label = Label(self.fenetreTireauPigeon, text="Compteur: " + str(self.score)+ "Nombre reel de pigeon:" + str(self.compteurpigeon), font=("", 15))
             self.fin_label.place(x=250 ,y=250 )
             self.cvn.delete('all')
