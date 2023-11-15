@@ -23,7 +23,7 @@ class TamaGotshi:
         self.vient_de_cliquer = True
 
 
-        self.argent.ajout(10) # donne un peu d'argent dès le debut du jeu /peut servir pour des test en changeant le montant
+        self.argent.ajout(500) # donne un peu d'argent dès le debut du jeu /peut servir pour des test en changeant le montant
 
 
         self.fenetre = Tk()
@@ -44,12 +44,12 @@ class TamaGotshi:
         self.can.pack()
 
         # Chargement de l'image du lit à afficher sur le canvas
-        self.img_lit =  PhotoImage(file="lit_vide.png")
+        self.img_lit =  PhotoImage(file="img_tama/lit_vide.PNG")
         self.image_lit = self.can.create_image(0,0,anchor= NW, image=self.img_lit)
 
 
         # Chargement de l'image du personnage à afficher sur le canvas
-        self.image =  PhotoImage(file="stickman_immmobile.PNG")
+        self.image =  PhotoImage(file="img_tama/stickman_immmobile.PNG")
         self.image_width = self.image.width()
         self.image_height = self.image.height()
         self.image_perso = self.can.create_image(250, 250, anchor= NW, image=self.image)
@@ -114,9 +114,6 @@ class TamaGotshi:
         self.consigne=Label(self.avertissement,text=" Pour cela cliquez quand vous voyez un pigeon apparaitre.")
         self.consigne.pack()
 
-        self.attention=Label(self.avertissement,text="(ATTENTION il y en a toujours 1 qui apparait a la fin en haut de l'écran et il compte quand même 🙂)",font=("", 8))
-        self.attention.pack()
-
         self.recompense=Label(self.avertissement,text="Si votre compte est juste vous recervrez de l' argent pour vous nourrir.")
         self.recompense.pack()
 
@@ -143,7 +140,7 @@ class TamaGotshi:
         self.fenetre3.title("paramètre")
         self.fenetre3.configure(bg = "#878c94")
         self.fenetre3.geometry("528x356")
-        self.fichierImage1 = PhotoImage(master=self.fenetre3, file = "Tamagotchi-1.png")
+        self.fichierImage1 = PhotoImage(master=self.fenetre3, file = "img_tama/Tamagotchi-1.png")
         self.labelImageDeFond1 = Label(self.fenetre3, image=self.fichierImage1)
         self.labelImageDeFond1.place(x=0, y=0)
         self.BoutonQuitter=Button(self.fenetre3,text="Quitter",fg ="#660066", bg="black",command=self.fenetre3.destroy)
@@ -155,7 +152,7 @@ class TamaGotshi:
         self.fenetre2.configure(bg = "#878c94")
         self.fenetre2.geometry("164x245")
 
-        self.fichierImage = PhotoImage(master=self.fenetre2, file = "bigoo.png")
+        self.fichierImage = PhotoImage(master=self.fenetre2, file = "img_tama/bigoo.png")
         self.labelImageDeFond = Label(self.fenetre2, image=self.fichierImage)
         self.labelImageDeFond.place(x=0, y=0)
 
@@ -183,7 +180,7 @@ class TamaGotshi:
 
 
         #crée l'image du lit avec le perso dedans
-        self.img_lit =  PhotoImage(file="stickman_dors_dans_un_lit.PNG")
+        self.img_lit =  PhotoImage(file="img_tama/stickman_dors_dans_un_lit.PNG")
         self.image_lit = self.can.create_image(0,0,anchor= NW, image=self.img_lit)
 
         # Mise en place du bouton pour se reveiller
@@ -212,11 +209,11 @@ class TamaGotshi:
         self.image_lit =self.can.delete
 
         #crée l'image du lit vide
-        self.img_lit =  PhotoImage(file="lit_vide.png")
+        self.img_lit =  PhotoImage(file="img_tama/lit_vide.png")
         self.image_lit = self.can.create_image(0,0,anchor= NW, image=self.img_lit)
 
         #recrée le perso dans la fenetre
-        self.image =  PhotoImage(file="stickman_immmobile.PNG")
+        self.image =  PhotoImage(file="img_tama/stickman_immmobile.PNG")
         self.image_width = self.image.width()
         self.image_height = self.image.height()
         self.image_perso = self.can.create_image(250, 250, anchor= NW, image=self.image)
@@ -284,7 +281,7 @@ class TamaGotshi:
 class TAP:
     def __init__(self,tama):
         self.fenetreTireauPigeon = Toplevel(tama)
-        self.fenetreTireauPigeon.title("Tire Au Pigeon")
+        self.fenetreTireauPigeon.title("img_tama/Tire Au Pigeon")
         self.fenetreTireauPigeon.geometry("800x600")
 
         self.timer = 0
@@ -302,7 +299,7 @@ class TAP:
         self.bnt_quitter.pack()
 
 
-        self.fond = Image.open("fond.gif")
+        self.fond = Image.open("img_tama/fond.gif")
         self.photo = ImageTk.PhotoImage(self.fond)
         self.cvn = Canvas(self.fenetreTireauPigeon, width=1000, height=1000)
         self.cvn.create_image(0, 0, image=self.photo, anchor="nw")
@@ -321,17 +318,17 @@ class TAP:
     def createPigeon(self):
         x_position = random.randint(-250, 425)
         y_position = 100
-        self.pigeonne =  PhotoImage(file="pigeon.gif")
+        self.pigeonne =  PhotoImage(file="img_tama/pigeon.gif")
         self.my_pigeon = self.cvn.create_image(x_position,y_position,anchor= 's', image=self.pigeonne)
         self.pigeons.append([self.my_pigeon, random.randint(5, 10), self.pigeonne])
         self.compteurpigeon += 1
-        if not self.timer == 58:
+        if not self.timer == 8:
             self.fenetreTireauPigeon.after(random.randint(700, 3000), self.createPigeon)
 
     def movePigeon(self):
         for i in self.pigeons:
             self.cvn.move(i[0], 0, i[1])
-        if not self.timer == 60:
+        if not self.timer == 8:
             self.fenetreTireauPigeon.after(random.randint(5, 15), self.movePigeon)
 
     def point(self, event):
@@ -346,7 +343,7 @@ class TAP:
         global en_jeu
         self.timer += 1
         self.timer_label['text'] = "Timer: " + str(self.timer)
-        if self.timer == 60:
+        if self.timer == 10:
             self.fin_label = Label(self.fenetreTireauPigeon, text="Compteur: " + str(self.score)+ "Nombre reel de pigeon:" + str(self.compteurpigeon), font=("", 15))
             self.fin_label.place(x=250 ,y=250 )
             self.cvn.delete('all')
@@ -394,23 +391,23 @@ class Magasin:
         self.magasin.mainloop()
 
     def char_img(self):
-        self.img_bannane=Image.open("bannane.gif")
+        self.img_bannane=Image.open("img_tama/bannane.gif")
         self.mon_image_bannane=ImageTk.PhotoImage(self.img_bannane)
         self.cnv_fond.create_image(75,250,image=self.mon_image_bannane)
 
-        self.img_poulet=Image.open("poulet.gif")
+        self.img_poulet=Image.open("img_tama/poulet.gif")
         self.mon_image_poulet=ImageTk.PhotoImage(self.img_poulet)
         self.cnv_fond.create_image(360,250,image=self.mon_image_poulet)
 
-        self.img_pasteque=Image.open("pasteque.gif")
+        self.img_pasteque=Image.open("img_tama/pasteque.gif")
         self.mon_image_pasteque=ImageTk.PhotoImage(self.img_pasteque)
         self.cnv_fond.create_image(660,250,image=self.mon_image_pasteque)
 
-        self.img_burger=Image.open("burger.gif")
+        self.img_burger=Image.open("img_tama/burger.gif")
         self.mon_image_burger=ImageTk.PhotoImage(self.img_burger)
         self.cnv_fond.create_image(960,250,image=self.mon_image_burger)
 
-        self.img_brocoli=Image.open("brocoli.gif")
+        self.img_brocoli=Image.open("img_tama/brocoli.gif")
         self.mon_image_brocoli = ImageTk.PhotoImage(self.img_brocoli)
         self.cnv_fond.create_image(1260,250,image=self.mon_image_brocoli)
 
